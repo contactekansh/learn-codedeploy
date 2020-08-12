@@ -5,3 +5,22 @@ files:
   - source: /
     destination: /tmp
 
+permissions:
+  - object: /
+    pattern: "**"
+    owner: ubuntu
+    group: ubuntu
+
+hooks:
+  ApplicationStop:
+    - location: stop.sh
+      timeout: 20
+      runas: ubuntu
+  ApplicationStart:
+    - location: start.sh
+      timeout: 20
+      runas: ubuntu
+  ValidateService:
+    - location: validate.sh
+      timeout: 120
+      runas: ubuntu
